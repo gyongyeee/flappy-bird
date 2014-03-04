@@ -45,7 +45,7 @@ var game = new Phaser.Game(
 function preload() {
     var assets = {
         spritesheet: {
-            birdie: ['assets/birdie.png', 24, 24],
+            birdie: ['assets/birdie.png', 48, 48],
             clouds: ['assets/clouds.png', 128, 64]
         },
         image: {
@@ -186,8 +186,8 @@ function reset() {
     gameOver = false;
     score = 0;
     credits.renderable = true;
-    scoreText.setText("DON'T\nTOUCH\nMY\nBIRDIE");
-    instText.setText("TOUCH TO FLAP\nBIRDIE WINGS");
+    scoreText.setText("DON'T\nTOUCH\nMY\nZSOZSO");
+    instText.setText("TOUCH TO RRR...");
     gameOverText.renderable = false;
     birdie.body.allowGravity = false;
     birdie.angle = 0;
@@ -295,7 +295,7 @@ function addScore(_, inv) {
 
 function setGameOver() {
     gameOver = true;
-    instText.setText("TOUCH BIRDIE\nTO TRY AGAIN");
+    instText.setText("TOUCH ZSOZSO\nTO TRY AGAIN");
     instText.renderable = true;
     var hiscore = window.localStorage.getItem('hiscore');
     hiscore = hiscore ? hiscore : score;
