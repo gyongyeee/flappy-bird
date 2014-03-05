@@ -55,7 +55,8 @@ function preload() {
         audio: {
             flap: ['assets/flap.wav'],
             score: ['assets/score.wav'],
-            hurt: ['assets/hurt.wav']
+            hurt: ['assets/hurt.wav'],
+            end: ['assets/end.wav']
         }
     };
     Object.keys(assets).forEach(function(type) {
@@ -81,6 +82,7 @@ var gameStarted,
     flapSnd,
     scoreSnd,
     hurtSnd,
+    endSnd,
     fingersTimer,
     cloudsTimer;
 
@@ -170,6 +172,7 @@ function create() {
     flapSnd = game.add.audio('flap');
     scoreSnd = game.add.audio('score');
     hurtSnd = game.add.audio('hurt');
+    endSnd = game.add.audio('end');
     // Add controls
     game.input.onDown.add(flap);
     // Start clouds timer
@@ -315,6 +318,7 @@ function setGameOver() {
     // Make birdie reset the game
     birdie.events.onInputDown.addOnce(reset);
     hurtSnd.play();
+    endSnd.play();
 }
 
 function update() {
