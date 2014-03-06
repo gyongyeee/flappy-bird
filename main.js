@@ -84,6 +84,7 @@ var gameStarted,
     hurtSnd,
     endSnd,
     fingersTimer,
+    endTimer,
     cloudsTimer;
 
 function create() {
@@ -180,6 +181,9 @@ function create() {
     cloudsTimer.onEvent.add(spawnCloud);
     cloudsTimer.start();
     cloudsTimer.add(Math.random());
+    // Start end timer
+    endTimer = new Phaser.Timer(game);
+    endTimer.onEvent.add(endSnd.play);
     // RESET!
     reset();
 }
@@ -214,6 +218,8 @@ function start() {
     instText.renderable = false;
     // START!
     gameStarted = true;
+
+    endTimer.stop();
 }
 
 function flap() {
@@ -318,7 +324,8 @@ function setGameOver() {
     // Make birdie reset the game
     birdie.events.onInputDown.addOnce(reset);
     hurtSnd.play();
-    endSnd.play();
+    endTimer.start();
+    endTimer.add(Math.random());
 }
 
 function update() {
