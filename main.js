@@ -54,13 +54,13 @@ function preload() {
             fence: ['assets/fence.png']
         },
         audio: {
-            background: ['assets/bg_full.wav'],
-            flap: ['assets/Zsozso_noise.wav'],
-            score1: ['assets/Zsozso_furo.wav'],
-            score2: ['assets/Zsozso_szemuveg.wav'],
-            score3: ['assets/Zsozso_solyom.wav'],
-            score4: ['assets/Zsozso_kad.wav'],
-            end: ['assets/end.wav']
+            background: [['assets/bg_full.mp3', 'assets/bg_full.ogg']],
+            flap: [['assets/Zsozso_noise.mp3', 'assets/Zsozso_noise.ogg']],
+            score1: [['assets/Zsozso_furo.mp3', 'assets/Zsozso_furo.ogg']],
+            score2: [['assets/Zsozso_szemuveg.mp3', 'assets/Zsozso_szemuveg.ogg']],
+            score3: [['assets/Zsozso_solyom.mp3', 'assets/Zsozso_solyom.ogg']],
+            score4: [['assets/Zsozso_kad.mp3', 'assets/Zsozso_kad.ogg']],
+            end: [['assets/Zsozso_neem.mp3', 'assets/Zsozso_neem.ogg']]
         }
     };
     Object.keys(assets).forEach(function(type) {
