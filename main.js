@@ -207,7 +207,7 @@ function reset() {
     gameOver = false;
     score = 0;
     credits.renderable = true;
-    scoreText.setText("FLAPPY\nZSOZSÓ");
+    scoreText.setText("FLAPPY\nZSOZSÃ“");
     instText.setText("TOUCH TO RRR...");
     gameOverText.renderable = false;
     birdie.body.allowGravity = false;
