@@ -50,6 +50,7 @@ function preload() {
             clouds: ['assets/clouds.png', 128, 64]
         },
         image: {
+            logo: ['assets/Jofogas_logo.png'],
             finger: ['assets/finger.png'],
             fence: ['assets/fence.png']
         },
@@ -88,6 +89,7 @@ var gameStarted,
     endSnd,
     BackgroundSnd,
     muteButton,
+    logoButton,
     scoreSndCnt,
     fingersTimer,
     endTimer,
@@ -112,6 +114,11 @@ var gameStarted,
                 align: 'center'
             }
         );
+    }
+
+    function logoOnClick() {
+        window.open('http://www.jofogas.hu');
+        return false;
     }
 
     function create() {
@@ -165,8 +172,11 @@ var gameStarted,
     scoreSndCnt = parseInt(Math.random() * scoreSnd.length, 10);
     endSnd = game.add.audio('end');
     // Add controls
-    muteButton = game.add.button(10, 10, 'volumes');
+    muteButton = game.add.button(game.world.width - 10 - 40, 10, 'volumes');
     muteButton.onInputDown.add(muteOnClick);
+
+    logoButton = game.add.button(10, 10, 'logo');
+    logoButton.onInputDown.add(logoOnClick);
 
     game.input.onDown.add(flap);
     // Start clouds timer
