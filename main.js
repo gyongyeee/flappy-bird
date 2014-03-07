@@ -54,9 +54,12 @@ function preload() {
             fence: ['assets/fence.png']
         },
         audio: {
-            flap: ['assets/flap.wav'],
-            score: ['assets/score.wav'],
             background: ['assets/bg_full.wav'],
+            flap: ['assets/Zsozso_noise.wav'],
+            score1: ['assets/Zsozso_furo.wav'],
+            score2: ['assets/Zsozso_szemuveg.wav'],
+            score3: ['assets/Zsozso_solyom.wav'],
+            score4: ['assets/Zsozso_kad.wav'],
             hurt: ['assets/hurt.wav'],
             end: ['assets/end.wav']
         }
@@ -87,6 +90,7 @@ var gameStarted,
     endSnd,
     BackgroundSnd,
     muteButton,
+    scoreSndCnt,
     fingersTimer,
     endTimer,
     cloudsTimer;
@@ -181,7 +185,13 @@ var gameStarted,
     gameOverText.scale.setTo(2, 2);
     // Add sounds
     flapSnd = game.add.audio('flap');
-    scoreSnd = game.add.audio('score');
+    scoreSnd = [
+        game.add.audio('score1'),
+        game.add.audio('score2'),
+        game.add.audio('score3'),
+        game.add.audio('score4')
+    ];
+    scoreSndCnt = parseInt(Math.random() * scoreSnd.length, 10);
     hurtSnd = game.add.audio('hurt');
     endSnd = game.add.audio('end');
     // Add controls
@@ -320,7 +330,8 @@ function addScore(_, inv) {
     invs.remove(inv);
     score += 1;
     scoreText.setText(score);
-    scoreSnd.play();
+    scoreSndCnt = (scoreSndCnt + 1) % scoreSnd.length;
+    scoreSnd[scoreSndCnt].play();
 }
 
 function setGameOver() {
