@@ -1,4 +1,3 @@
-var DEBUG = false;
 var SPEED = 690;
 var GRAVITY = 40;
 var FLAP = 620;
@@ -26,8 +25,7 @@ function main() {
 var state = {
     preload: preload,
     create: create,
-    update: update,
-    render: render
+    update: update
 };
 
 var parent = document.querySelector('#screen');
@@ -414,18 +412,6 @@ function update() {
     // Scroll fence
     if (!gameOver) {
         fence.tilePosition.x -= game.time.physicsElapsed * SPEED / 2;
-    }
-}
-
-function render() {
-    if (DEBUG) {
-        game.debug.renderSpriteBody(birdie);
-        fingers.forEachAlive(function(finger) {
-            game.debug.renderSpriteBody(finger);
-        });
-        invs.forEach(function(inv) {
-            game.debug.renderSpriteBody(inv);
-        });
     }
 }
 
