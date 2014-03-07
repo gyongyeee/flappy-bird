@@ -7,7 +7,7 @@ var OPENING = 134;
 
 
 WebFontConfig = {
-    google: { families: [ 'Press+Start+2P::latin' ] },
+    google: { families: [ 'Press+Start+2P::latin-ext' ] },
     active: main
 };
 (function() {
@@ -193,7 +193,7 @@ function reset() {
     gameOver = false;
     score = 0;
     credits.renderable = true;
-    scoreText.setText("DON'T\nTOUCH\nMY\nZSOZSO");
+    scoreText.setText("DON'T\nTOUCH\nMY\nZSOZSÓ");
     instText.setText("TOUCH TO RRR...");
     gameOverText.renderable = false;
     birdie.body.allowGravity = false;
@@ -280,7 +280,7 @@ function spawnFingers() {
 
     var fingerY = ((game.height - 16 - o() / 2) / 2) + (Math.random() > 0.5 ? -1 : 1) * Math.random() * game.height / 6;
     // Bottom finger
-    var botFinger = spawnFinger(fingerY);
+    var botFinger = spawnFinger(fingerY, false);
     // Top finger (flipped)
     var topFinger = spawnFinger(fingerY, true);
 
@@ -415,4 +415,4 @@ function render() {
     }
 }
 
-};
+}
