@@ -45,6 +45,7 @@ var game = new Phaser.Game(
 function preload() {
     var assets = {
         spritesheet: {
+            volumes: ['assets/volumes.png', 40, 32],
             birdie: ['assets/birdie.png', 48, 29],
             clouds: ['assets/clouds.png', 128, 64]
         },
@@ -55,6 +56,7 @@ function preload() {
         audio: {
             flap: ['assets/flap.wav'],
             score: ['assets/score.wav'],
+            background: ['assets/bg_full.wav'],
             hurt: ['assets/hurt.wav'],
             end: ['assets/end.wav']
         }
@@ -83,11 +85,19 @@ var gameStarted,
     scoreSnd,
     hurtSnd,
     endSnd,
+    BackgroundSnd,
+    muteButton,
     fingersTimer,
     endTimer,
     cloudsTimer;
 
-function create() {
+    function muteOnClick() {
+        muteButton.setFrames(1 - muteButton.frame);
+        BackgroundSnd.mute = ! BackgroundSnd.mute;
+        return false;
+    }
+
+    function create() {
     // Set world dimensions
     var screenWidth = parent.clientWidth > window.innerWidth ? window.innerWidth : parent.clientWidth;
     var screenHeight = parent.clientHeight > window.innerHeight ? window.innerHeight : parent.clientHeight;
@@ -183,7 +193,15 @@ function create() {
     cloudsTimer.add(Math.random());
     // Start end timer
     endTimer = new Phaser.Timer(game);
-    endTimer.onEvent.add(endSnd.play);
+    endTimer.onEvent.add(endSnd.play.bind());
+
+    BackgroundSnd = game.add.audio('background', 1, true);
+    BackgroundSnd.volume = 0.5;
+    BackgroundSnd.play('', 0, 1, true);
+
+    muteButton = game.add.button(10, 10, 'volumes', null, this, 0, 0, 0);
+    muteButton.onInputDown.add(muteOnClick, this, 100);
+
     // RESET!
     reset();
 }
