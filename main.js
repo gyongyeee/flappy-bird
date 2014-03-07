@@ -185,6 +185,9 @@ var gameStarted,
     hurtSnd = game.add.audio('hurt');
     endSnd = game.add.audio('end');
     // Add controls
+    muteButton = game.add.button(10, 10, 'volumes');
+    muteButton.onInputDown.add(muteOnClick);
+
     game.input.onDown.add(flap);
     // Start clouds timer
     cloudsTimer = new Phaser.Timer(game);
@@ -198,9 +201,6 @@ var gameStarted,
     BackgroundSnd = game.add.audio('background', 1, true);
     BackgroundSnd.volume = 0.5;
     BackgroundSnd.play('', 0, 1, true);
-
-    muteButton = game.add.button(10, 10, 'volumes', null, this, 0, 0, 0);
-    muteButton.onInputDown.add(muteOnClick, this, 100);
 
     // RESET!
     reset();
@@ -241,6 +241,9 @@ function start() {
 }
 
 function flap() {
+    if (muteButton.body.sprite.bounds.contains(game.input.x, game.input.y)) {
+        return;
+    }
     if (!gameStarted) {
         start();
     }
