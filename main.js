@@ -60,7 +60,6 @@ function preload() {
             score2: ['assets/Zsozso_szemuveg.wav'],
             score3: ['assets/Zsozso_solyom.wav'],
             score4: ['assets/Zsozso_kad.wav'],
-            hurt: ['assets/hurt.wav'],
             end: ['assets/end.wav']
         }
     };
@@ -86,7 +85,6 @@ var gameStarted,
     gameOverText,
     flapSnd,
     scoreSnd,
-    hurtSnd,
     endSnd,
     BackgroundSnd,
     muteButton,
@@ -192,7 +190,6 @@ var gameStarted,
         game.add.audio('score4')
     ];
     scoreSndCnt = parseInt(Math.random() * scoreSnd.length, 10);
-    hurtSnd = game.add.audio('hurt');
     endSnd = game.add.audio('end');
     // Add controls
     muteButton = game.add.button(10, 10, 'volumes');
@@ -355,7 +352,6 @@ function setGameOver() {
     fingersTimer.stop();
     // Make birdie reset the game
     birdie.events.onInputDown.addOnce(reset);
-    hurtSnd.play();
     endTimer.start();
     endTimer.add(Math.random());
 }
