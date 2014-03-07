@@ -99,6 +99,21 @@ var gameStarted,
         return false;
     }
 
+    function createText(xpos, ypos, size) {
+        return game.add.text(
+            (xpos < 1 ? game.world.width * xpos : xpos),
+            (ypos < 1 ? game.world.height * ypos : ypos),
+            '',
+            {
+                font: (size || 8 ) + 'px "Press Start 2P"',
+                fill: '#fff',
+                stroke: '#430',
+                strokeThickness: 4,
+                align: 'center'
+            }
+        );
+    }
+
     function create() {
     // Set world dimensions
     var screenWidth = parent.clientWidth > window.innerWidth ? window.innerWidth : parent.clientWidth;
@@ -111,16 +126,7 @@ var gameStarted,
     bg.drawRect(0, 0, game.world.width, game.world.height);
     bg.endFill();
     // Credits 'yo
-    credits = game.add.text(
-        game.world.width / 2,
-        10,
-        '',
-        {
-            font: '8px "Press Start 2P"',
-            fill: '#fff',
-            align: 'center'
-        }
-    );
+    credits = createText(0.5, 10);
     credits.anchor.x = 0.5;
     // Add clouds group
     clouds = game.add.group();
@@ -139,46 +145,13 @@ var gameStarted,
     fence = game.add.tileSprite(0, game.world.height - 32, game.world.width, 32, 'fence');
     fence.tileScale.setTo(2, 2);
     // Add score text
-    scoreText = game.add.text(
-        game.world.width / 2,
-        game.world.height / 4,
-        "",
-        {
-            font: '16px "Press Start 2P"',
-            fill: '#fff',
-            stroke: '#430',
-            strokeThickness: 4,
-            align: 'center'
-        }
-    );
+    scoreText = createText(0.5, 0.25, 16);
     scoreText.anchor.setTo(0.5, 0.5);
     // Add instructions text
-    instText = game.add.text(
-        game.world.width / 2,
-        game.world.height - game.world.height / 4,
-        "",
-        {
-            font: '8px "Press Start 2P"',
-            fill: '#fff',
-            stroke: '#430',
-            strokeThickness: 4,
-            align: 'center'
-        }
-    );
+    instText = createText(0.5, 0.75);
     instText.anchor.setTo(0.5, 0.5);
     // Add game over text
-    gameOverText = game.add.text(
-        game.world.width / 2,
-        game.world.height / 2,
-        "",
-        {
-            font: '16px "Press Start 2P"',
-            fill: '#fff',
-            stroke: '#430',
-            strokeThickness: 4,
-            align: 'center'
-        }
-    );
+    gameOverText = createText(0.5, 0.5, 16);
     gameOverText.anchor.setTo(0.5, 0.5);
     gameOverText.scale.setTo(2, 2);
     // Add sounds
