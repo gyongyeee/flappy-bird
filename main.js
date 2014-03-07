@@ -266,29 +266,27 @@ function spawnCloud() {
     cloudsTimer.add(4 * Math.random());
 }
 
-function o() {
-    return OPENING + 60 * ((score > 50 ? 50 : 50 - score) / 50);
-}
-
-function spawnFinger(fingerY, flipped) {
-    var finger = fingers.create(
-        game.width,
-        fingerY + (flipped ? -o() : o()) / 2,
-        'finger'
-    );
-    finger.body.allowGravity = false;
-
-    // Flip finger! *GASP*
-    finger.scale.setTo(2, flipped ? -2 : 2);
-    finger.body.offset.y = flipped ? -finger.body.height * 2 : 0;
-
-    // Move to the left
-    finger.body.velocity.x = -SPEED;
-
-    return finger;
-}
-
 function spawnFingers() {
+    function o() {
+        return OPENING + 60 * ((score > 50 ? 50 : 50 - score) / 50);
+    }
+    function spawnFinger(fingerY, flipped) {
+        var finger = fingers.create(
+            game.width,
+            fingerY + (flipped ? -o() : o()) / 2,
+            'finger'
+        );
+        finger.body.allowGravity = false;
+
+        // Flip finger! *GASP*
+        finger.scale.setTo(2, flipped ? -2 : 2);
+        finger.body.offset.y = flipped ? -finger.body.height * 2 : 0;
+
+        // Move to the left
+        finger.body.velocity.x = -SPEED;
+
+        return finger;
+    }
     fingersTimer.stop();
 
     var fingerY = ((game.height - 16 - o() / 2) / 2) + (Math.random() > 0.5 ? -1 : 1) * Math.random() * game.height / 6;
