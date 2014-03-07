@@ -167,6 +167,15 @@ var gameStarted,
         game.add.audio('score1'),
         game.add.audio('score2'),
         game.add.audio('score3'),
+        game.add.audio('score1'),
+        game.add.audio('score2'),
+        game.add.audio('score3'),
+        game.add.audio('score1'),
+        game.add.audio('score2'),
+        game.add.audio('score3'),
+        game.add.audio('score1'),
+        game.add.audio('score2'),
+        game.add.audio('score3'),
         game.add.audio('score4')
     ];
     scoreSndCnt = parseInt(Math.random() * scoreSnd.length, 10);
@@ -184,9 +193,6 @@ var gameStarted,
     cloudsTimer.onEvent.add(spawnCloud);
     cloudsTimer.start();
     cloudsTimer.add(Math.random());
-    // Start end timer
-    endTimer = new Phaser.Timer(game);
-    endTimer.onEvent.add(endSnd.play.bind());
 
     BackgroundSnd = game.add.audio('background', 1, true);
     BackgroundSnd.volume = 0.5;
@@ -226,8 +232,6 @@ function start() {
     instText.renderable = false;
     // START!
     gameStarted = true;
-
-    endTimer.stop();
 }
 
 function flap() {
@@ -335,8 +339,7 @@ function setGameOver() {
     fingersTimer.stop();
     // Make birdie reset the game
     birdie.events.onInputDown.addOnce(reset);
-    endTimer.start();
-    endTimer.add(Math.random());
+    endSnd.play();
 }
 
 function update() {
