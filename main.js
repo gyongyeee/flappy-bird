@@ -240,15 +240,6 @@ var gameStarted,
         game.add.audio('score1'),
         game.add.audio('score2'),
         game.add.audio('score3'),
-        game.add.audio('score1'),
-        game.add.audio('score2'),
-        game.add.audio('score3'),
-        game.add.audio('score1'),
-        game.add.audio('score2'),
-        game.add.audio('score3'),
-        game.add.audio('score1'),
-        game.add.audio('score2'),
-        game.add.audio('score3'),
         game.add.audio('score4')
     ];
     scoreSndCnt = parseInt(Math.random() * scoreSnd.length, 10);
