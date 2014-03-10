@@ -177,8 +177,9 @@ var gameStarted,
     cloudsTimer;
 
     function muteOnClick() {
-        muteButton.setFrames(1 - muteButton.frame);
         BackgroundSnd.mute = ! BackgroundSnd.mute;
+        settings.mute = BackgroundSnd.mute;
+        muteButton.setFrames(BackgroundSnd.mute ? 1 : 0);
         return false;
     }
 
@@ -253,8 +254,6 @@ var gameStarted,
     scoreSndCnt = parseInt(Math.random() * scoreSnd.length, 10);
     endSnd = game.add.audio('end');
     // Add controls
-    muteButton = game.add.button(game.world.width - 10 - 40, 10, 'volumes');
-    muteButton.onInputDown.add(muteOnClick);
 
     logoButton = game.add.button(10, 10, 'logo');
     logoButton.onInputDown.add(logoOnClick);
@@ -269,6 +268,12 @@ var gameStarted,
     BackgroundSnd = game.add.audio('background', 1, true);
     BackgroundSnd.volume = 0.5;
     BackgroundSnd.play('', 0, 1, true);
+
+    muteButton = game.add.button(game.world.width - 10 - 40, 10, 'volumes');
+    muteButton.onInputDown.add(muteOnClick);
+
+//    BackgroundSnd.mute = (settings.mute === 'true');
+//    muteButton.setFrames(BackgroundSnd.mute ? 1 : 0);
 
     // RESET!
     reset();
@@ -316,6 +321,8 @@ function flap() {
     if (!gameOver) {
         birdie.body.velocity.y = -FLAP;
         flapSnd.play();
+    } else {
+        reset();
     }
 }
 
@@ -392,10 +399,9 @@ function setGameOver() {
     gameOver = true;
     instText.setText("KATTINTS\nÉS JÁTSSZ ÚJRA!");
     instText.renderable = true;
-    var hiscore = window.localStorage.getItem('hiscore');
-    hiscore = hiscore ? hiscore : score;
-    hiscore = score > parseInt(hiscore, 10) ? score : hiscore;
-    window.localStorage.setItem('hiscore', hiscore);
+    var hiscore = parseInt( settings.hiscore, 10 );
+    hiscore = score > hiscore ? score : hiscore;
+    settings.hiscore = hiscore;
     gameOverText.setText("AZ ESZEMET NEEEM!!!\n\nCSÚCS: " + hiscore);
     gameOverText.renderable = true;
     // Stop all fingers
@@ -407,8 +413,7 @@ function setGameOver() {
     });
     // Stop spawning fingers
     fingersTimer.stop();
-    // Make birdie reset the game
-    birdie.events.onInputDown.addOnce(reset);
+
     endSnd.play();
 }
 
