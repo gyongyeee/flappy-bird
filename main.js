@@ -396,6 +396,12 @@ function addScore(_, inv) {
 }
 
 function setGameOver() {
+
+	var settings = new Storage({
+	hiscore: 0,
+	mute: false
+	});
+
     gameOver = true;
     instText.setText("KATTINTS\nÉS JÁTSSZ ÚJRA!");
     instText.renderable = true;
