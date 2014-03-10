@@ -76,7 +76,7 @@ function preload() {
         });
     });
 }
-
+/*
 function Flappy( game ) {
     this.flap = new Phaser.Signal();
 
@@ -85,7 +85,7 @@ function Flappy( game ) {
 /**
 * @name Flappy#flap
 * @property {number} height - Gets or sets the current height of the game world.
-*/
+*
 Object.defineProperty(Phaser.World.prototype, "height", {
 
     get: function () {
@@ -98,7 +98,7 @@ Object.defineProperty(Phaser.World.prototype, "height", {
 
 });
 
-
+*/
     var CookieStorage = {
         set: function setCookie(name, value, days) {
             var expires = "";
@@ -126,9 +126,9 @@ Object.defineProperty(Phaser.World.prototype, "height", {
         }
      },
      LocalStorage = {
-        set: window.localStorage.setItem,
-        get: window.localStorage.getItem,
-        remove: window.localStorage.removeItem
+        set: window.localStorage.setItem.bind(window.localStorage),
+        get: window.localStorage.getItem.bind(window.localStorage),
+        remove: window.localStorage.removeItem.bind(window.localStorage)
      };
 
 function Storage(defaults) {
