@@ -1,0 +1,25 @@
+INSTALL(www/flappy-zsozso/assets
+	conf[
+		bg_full.mp3
+		bg_full.ogg
+		birdie.png
+		clouds.png
+		fence.png
+		finger.png
+		Jofogas_logo.png
+		volumes.png
+		Zsozso_furo.mp3
+		Zsozso_furo.ogg
+		Zsozso_kad.mp3
+		Zsozso_kad.ogg
+		Zsozso_neem.mp3
+		Zsozso_neem.ogg
+		Zsozso_noise.mp3
+		Zsozso_noise.ogg
+		Zsozso_solyom.mp3
+		Zsozso_solyom.ogg
+		Zsozso_szemuveg.mp3
+		Zsozso_szemuveg.ogg
+	]
+)
+

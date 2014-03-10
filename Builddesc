@@ -1,0 +1,13 @@
+INSTALL(www/flappy-zsozso
+	conf[
+		index.html
+		main.js
+		phaser.min.js
+	]
+)
+
+
+COMPONENT([
+		assets
+	]
+)
