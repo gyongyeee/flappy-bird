@@ -44,7 +44,7 @@ function preload() {
     var assets = {
         spritesheet: {
             volumes: ['assets/volumes.png', 40, 32],
-            birdie: ['assets/birdie.png', 48, 29],
+            birdie: ['assets/birdie.png', 36, 35],
             clouds: ['assets/clouds.png', 128, 64]
         },
         image: {
@@ -69,6 +69,82 @@ function preload() {
     });
 }
 
+function Flappy( game ) {
+    this.flap = new Phaser.Signal();
+
+}
+
+/**
+* @name Flappy#flap
+* @property {number} height - Gets or sets the current height of the game world.
+*/
+Object.defineProperty(Phaser.World.prototype, "height", {
+
+    get: function () {
+        return this.bounds.height;
+    },
+
+    set: function (value) {
+        this.bounds.height = value;
+    }
+
+});
+
+
+    var CookieStorage = {
+        set: function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + value + expires + "; path=/";
+        },
+
+        get: function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        },
+
+        remove: function removeCookie(name) {
+            this.set(name, "", -1);
+        }
+     },
+     LocalStorage = {
+        set: window.localStorage.setItem,
+        get: window.localStorage.getItem,
+        remove: window.localStorage.removeItem
+     };
+
+function Storage(defaults) {
+    var storage = this;
+    function load( key ) {
+        return LocalStorage.get( key ) || defaults[ key ];
+    }
+    function save( key, data ) {
+        CookieStorage.set( key, data );
+        LocalStorage.set( key, data );
+    }
+    Object.keys( defaults ).forEach( function( key ) {
+        Object.defineProperty(storage, key, {
+            get: load.bind(storage, key),
+            set: save.bind(storage, key)
+        });
+    });
+}
+
+var settings = new Storage({
+    hiscore: 0,
+    mute: false
+});
+
 var gameStarted,
     gameOver,
     score,
@@ -90,7 +166,6 @@ var gameStarted,
     logoButton,
     scoreSndCnt,
     fingersTimer,
-    endTimer,
     cloudsTimer;
 
     function muteOnClick() {
