@@ -280,7 +280,7 @@ function reset() {
     score = 0;
     credits.renderable = true;
     scoreText.setText("FLAPPY\nZSOZSÓ");
-    instText.setText("TOUCH TO RRR...");
+    instText.setText("KATTINTS A KEZDÉSHEZ...");
     gameOverText.renderable = false;
     birdie.body.allowGravity = false;
     birdie.angle = 0;
@@ -300,7 +300,7 @@ function start() {
     fingersTimer.start();
     fingersTimer.add(2);
     // Show score
-    scoreText.setText(score);
+    scoreText.setText("PONTSZÁMOD: " + score);
     instText.renderable = false;
     // START!
     gameStarted = true;
@@ -383,20 +383,20 @@ function spawnFingers() {
 function addScore(_, inv) {
     invs.remove(inv);
     score += 1;
-    scoreText.setText(score);
+    scoreText.setText("PONTSZÁMOD: " + score);
     scoreSndCnt = (scoreSndCnt + 1) % scoreSnd.length;
     scoreSnd[scoreSndCnt].play();
 }
 
 function setGameOver() {
     gameOver = true;
-    instText.setText("TOUCH ZSOZSO\nTO TRY AGAIN");
+    instText.setText("KATTINTS\nÉS JÁTSSZ ÚJRA!");
     instText.renderable = true;
     var hiscore = window.localStorage.getItem('hiscore');
     hiscore = hiscore ? hiscore : score;
     hiscore = score > parseInt(hiscore, 10) ? score : hiscore;
     window.localStorage.setItem('hiscore', hiscore);
-    gameOverText.setText("GAMEOVER\n\nHIGH SCORE\n" + hiscore);
+    gameOverText.setText("AZ ESZEMET NEEEM!!!\n\nCSÚCS: " + hiscore);
     gameOverText.renderable = true;
     // Stop all fingers
     fingers.forEachAlive(function(finger) {
