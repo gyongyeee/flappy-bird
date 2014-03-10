@@ -4,6 +4,14 @@ var FLAP = 620;
 var SPAWN_RATE = 1 / 1.2;
 var OPENING = 134;
 
+if (typeof(console) === 'undefined') {
+    function nop(){}
+    var console = {
+        info: nop,
+        log: nop,
+        error: nop
+    };
+}
 
 WebFontConfig = {
     google: { families: [ 'Press+Start+2P::latin-ext' ] },
